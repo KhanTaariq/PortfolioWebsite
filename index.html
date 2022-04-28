@@ -420,24 +420,24 @@
                             </div>
                         </div>
                         <div class="right-contact">
-                            <form action="" class="contact-form">
+                            <form class="contact-form" method="post">
                                 <div class="input-control i-c-2">
-                                    <input type="text" required placeholder="YOUR NAME">
-                                    <input type="email" required placeholder="YOUR EMAIL">
+                                    <input type="text" id="name" placeholder="YOUR NAME">
+                                    <input type="email" id= "email" placeholder="YOUR EMAIL">
                                 </div>
                                 <div class="input-control">
-                                    <input type="text" required placeholder="ENTER SUBJECT">
+                                    <input type="text" id="subject" placeholder="ENTER SUBJECT">
                                 </div>
                                 <div class="input-control">
-                                    <textarea name="" id="" cols="15" rows="8" placeholder="Message Here..."></textarea>
+                                    <textarea name="" id="message" cols="15" rows="8" placeholder="Message Here..."></textarea>
                                 </div>
                                 <div class="submit-btn">
-                                    <a href="#" class="main-btn" onclick = "myFunction()">
+                                    <button id ="btn" class="main-btn">
                                         <span class="btn-text">
-                                            submit
+                                            Submit
                                         </span>
                                         <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
-                                    </a>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -465,5 +465,30 @@
         </div>
         <script src="app.js">
         </script>
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <script>
+        var btn = document.getElementById('btn')
+        btn.addEventListener('click', function(e)
+            {//console.log('hi');
+                e.preventDefault() 
+                    var name = document.getElementById('name').value;
+                    var email = document.getElementById('email').value;
+                    var subject = document.getElementById('subject').value;
+                    var message = document.getElementById('message').value;
+                    var body = "name:" + name + "<br/> email: " + email + "<br/> subject: " + subject + "<br/> message: " + message;
+            
+                    Email.send({
+                Host : "smtp.gmail.com",
+                Username : "taariqkhs@gmail.com",
+                Password : "aexoenndwbpfxgpq",
+                To : 'taariqkhs@gmail.com',
+                From : email,
+                Subject : subject,
+                Body : body
+                  }).then(
+                message => alert("message sent successfully")
+                );  
+            })
+            </script>
     </body>
 </html>
